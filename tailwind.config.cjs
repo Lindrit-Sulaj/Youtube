@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'mulish': ['Mulish', 'sans-serif']
+        'default': ['Inter', 'sans-serif']
       }
     },
   },

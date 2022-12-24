@@ -1,5 +1,4 @@
 * {
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -8,9 +7,14 @@
 .App {
   display: grid;
   grid-template-columns: .12fr .88fr;
-  grid-template-rows: 1fr;
-  grid-template-areas: "sidebar content";
+  grid-template-rows: .065fr .935fr;
+  grid-template-areas: "sidebar navbar"
+  "sidebar content";
   height: 100vh;
+
+  .navbar {
+    grid-area: navbar;
+  }
 
   .sidebar {
     grid-area: sidebar;
