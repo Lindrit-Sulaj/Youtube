@@ -1,19 +1,64 @@
+@import url('./animations.scss');
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+@mixin sm {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: 1280px) {
+    @content;
+  }
+}
+
 .App {
   display: grid;
-  grid-template-columns: .12fr .88fr;
-  grid-template-rows: .065fr .935fr;
-  grid-template-areas: "sidebar navbar"
-  "sidebar content";
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "content";
+
+
+  @include lg {
+    grid-template-columns: .16fr .84fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "sidebar content";
+  };
+
+  @include xl {
+    grid-template-columns: .12fr .88fr;
+  }
+
   height: 100vh;
 
   .navbar {
-    grid-area: navbar;
+    max-width: 100%;
+
+    @include lg {
+      width: 84%;
+    }
+
+    @include xl {
+      width: 88%;
+    }
   }
 
   .sidebar {
@@ -23,7 +68,5 @@
 
   .content {
     grid-area: content;
-    background-color: lightblue;
   }
 }
-

@@ -7,6 +7,12 @@ module.exports = {
     extend: {
       fontFamily: {
         'default': ['Inter', 'sans-serif']
+      },
+      colors: {
+        neutral: {
+          850: '#191919',
+          1000: '#101010'
+        }
       }
     },
   },
