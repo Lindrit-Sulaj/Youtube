@@ -1,9 +1,30 @@
-import React from 'react'
+import React from 'react';
+import MenuItem from './MenuItem';
 
 const Sidebar = () => {
   return (
-    <div className="sidebar">
-      sidebar
+    <div className="sidebar py-4">
+      <div className='text-white ml-2 flex gap-2 items-center'>
+        <img src="https://ik.imagekit.io/0s9lwb2yr/Youtube/logo?ik-sdk-version=javascript-1.4.3&updatedAt=1672143987388" className='w-6 h-6' alt="Logo" />
+        <h1 className='text-blue-300 text-xl font-medium'>YouTube</h1>
+      </div>
+      <hr className='my-4 border-none h-[2px] bg-neutral-800' />
+      <div className=''>
+        <MenuItem title="Home" link="/" icon="fa-solid fa-house" />
+        <MenuItem title="Subscriptions" link="/feed/subscriptions" icon="fa-solid fa-clapperboard" />
+        <a href="https://github.com/Lindrit-Sulaj" className="transition-all flex px-4 items-center py-2 gap-4 lg:gap-5 lg:py-[10px] hover:bg-neutral-800" onClick={() => setMenuOpened(false)}>
+          <div className='flex justify-center items-center'>
+            <i className={`fa-brands fa-github text-neutral-200`}></i>
+          </div>
+          <span className='text-neutral-200 lg:text-lg font-secondary'>Creator</span>
+        </a>
+      </div>
+      <hr className='my-4 border-none h-[2px] bg-neutral-800' />
+      <dir>
+        <MenuItem title="Saved videos" link="feed/saved-videos" icon="fa-solid fa-bookmark"/>
+        <MenuItem title="History" link="feed/history" icon="fa-solid fa-address-book"/>
+        <MenuItem title="Coding" link="playlist/coding" icon="fa-solid fa-code"/>
+      </dir>
     </div>
   )
 }
