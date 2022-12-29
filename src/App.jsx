@@ -1,20 +1,23 @@
 import { useState } from 'react'
 import './assets/index.scss';
 import { useSelector } from 'react-redux';
+import { Routes, Route } from 'react-router-dom';
+
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
-import { Routes, Route } from 'react-router-dom';
+import Discover from './pages/Discover';
 
 function App() {
   const state = useSelector(state => state);
 
+
   return (
     <div className="App font-default bg-neutral-100 dark:bg-neutral-1000">
+      <Navbar />
       <Sidebar />
-      <div className="content pt-[65px]">
-        <Navbar />
+      <div className="content pt-[75px]">
         <Routes>
-          <Route exact path='/' element={<p>Landing</p>}></Route>
+          <Route exact path='/' element={<Discover />}></Route>
           <Route exact path='/hi' element={<p>Hi</p>}></Route>
         </Routes>
         <div className="h-[140vh]"></div>

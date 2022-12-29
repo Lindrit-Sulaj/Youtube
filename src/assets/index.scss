@@ -51,14 +51,6 @@
 
   .navbar {
     max-width: 100%;
-
-    @include lg {
-      width: 84%;
-    }
-
-    @include xl {
-      width: 88%;
-    }
   }
 
   .sidebar {
@@ -94,4 +86,8 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.suggestions::-webkit-scrollbar {
+  height: 0px;
 }

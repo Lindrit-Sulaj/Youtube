@@ -7,7 +7,7 @@ const MenuItem = ({ title, link, icon, setMenuOpened }) => {
       <div className='flex justify-center items-center'>
         <i className={`${icon} text-neutral-200`}></i>
       </div>
-      <span className='text-neutral-200 lg:text-lg font-secondary'>{title}</span>
+      <span className='text-neutral-200 lg:text-lg font-secondary truncate'>{title}</span>
     </Link>
   )
 }
