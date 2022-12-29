@@ -3,8 +3,7 @@ import './assets/index.scss';
 import { useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 
-import Sidebar from './components/Sidebar';
-import Navbar from './components/Navbar';
+import { Sidebar, Navbar } from './components';
 import Discover from './pages/Discover';
 
 function App() {
