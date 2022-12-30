@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 import useMediaQuery from '../hooks/useMediaQuery';
 import MenuItem from './MenuItem';
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [windowWidth, breakpoint] = useMediaQuery();
   const [menuOpened, setMenuOpened] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -11,13 +14,14 @@ const Navbar = () => {
   const handleSearch = () => {
     if (searchTerm === '' || searchTerm.split(" ").length < 1) return;
 
+    navigate(`/search/${searchTerm}`);
   }
 
   return (
     <nav className='navbar h-[70px] fixed top-0 w-full pr-4 bg-neutral-200 dark:bg-neutral-1000'>
       {(breakpoint === 'sm' || breakpoint === 'md') ? (
         <div className='bg-neutral-200 dark:bg-neutral-850 my-3 ml-5 mr-0 py-2 px-6 flex items-center rounded-xl relative'>
-          <button className='w-[5%] text-black dark:text-blue-400'>
+          <button className='w-[5%] text-black dark:text-blue-400' onClick={handleSearch}>
             <i className="fa-solid fa-magnifying-glass"></i>
           </button>
           <input type="text" className='w-[90%] bg-transparent h-full outline-none px-3 text-white' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder='Search for any video' />
@@ -57,7 +61,7 @@ const Navbar = () => {
             <h1 className='text-blue-300 text-xl font-medium'>YouTube</h1>
           </div>
           <div className='flex items-center bg-neutral-850 px-4 gap-2 rounded-lg'>
-            <i className="fa-solid fa-magnifying-glass text-white"></i>
+            <i className="fa-solid fa-magnifying-glass text-white" onClick={handleSearch}></i>
             <input type="text" className='bg-transparent w-[340px] h-12 outline-none text-white px-2' placeholder='Search for videos' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
           </div>
 

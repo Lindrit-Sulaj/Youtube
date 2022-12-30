@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+
 import { suggestedVideos } from '../assets/constants';
 import { VideoCard } from '../components';
+import { Loader } from '../components';
 import { useGetSuggestedVideosQuery } from '../redux/services/youtubeApi';
 
 const Discover = () => {
@@ -37,8 +39,10 @@ const Discover = () => {
           />
         ))}
 
-      </div>) : (
-        <p>Error occurred or is loading</p>
+      </div>) : (isLoading) ? (
+        <Loader />
+      ) : (
+        <p>An error has occurred</p>
       )}
     </div>
   )
