@@ -9,11 +9,13 @@ const Channel = () => {
   const { data, isLoading, error } = useGetChannelDetailsQuery(id);
   const { data: videosData, isLoading: videosLoading, error: videosError } = useGetChannelVideosQuery(id);
 
-  console.log(videosData);
-
   const formatter = Intl.NumberFormat('en', { notation: 'compact' })
 
   if (isLoading) return <div className='text-white'><Loader /></div>
+
+  if (!data.hasOwnProperty('items')) {
+    return <p className='text-white text-center font-secondary'>Couldn't load channel details</p>
+  }
 
   return (
     <div className="text-white my-3">
@@ -25,9 +27,9 @@ const Channel = () => {
           <div className='flex w-full px-4 md:px-0 mt-8 md:w-5/6 mx-auto gap-4 items-center'>
             <img className="w-24 h-24 object-cover rounded-full" src={data.items[0].snippet.thumbnails.high.url} alt={`${data.items[0].brandingSettings.channel.title} profile picture`} />
             <div>
-              <h1 className="text-lg font-medium font-secondary">{data.items[0].brandingSettings.channel.title}</h1>
-              <h2 className='text-neutral-400 mb-2'>{data.items[0].snippet.customUrl}</h2>
-              <p className='text-neutral-400 font-medium'>{formatter.format(data.items[0].statistics.subscriberCount)} Subscribers</p>
+              <h1 className="text-lg font-medium font-secondary">{data?.items[0].brandingSettings.channel.title}</h1>
+              <h2 className='text-neutral-400 mb-2'>{data?.items[0].snippet.customUrl}</h2>
+              <p className='text-neutral-400 font-medium'>{formatter.format(data?.items[0].statistics.subscriberCount)} Subscribers</p>
             </div>
           </div>
           <div className='w-full md:w-5/6 px-4 md:px-0 mx-auto mt-16'>

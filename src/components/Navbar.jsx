@@ -18,7 +18,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className='navbar h-[70px] fixed top-0 w-full pr-4 bg-neutral-200 dark:bg-neutral-1000'>
+    <nav className='navbar h-[75px] fixed top-0 w-full pr-4 bg-neutral-200 dark:bg-neutral-1000'>
       {(breakpoint === 'sm' || breakpoint === 'md') ? (
         <div className='bg-neutral-200 dark:bg-neutral-850 my-3 ml-5 mr-0 py-2 px-6 flex items-center rounded-xl relative'>
           <button className='w-[5%] text-black dark:text-blue-400' onClick={handleSearch}>
