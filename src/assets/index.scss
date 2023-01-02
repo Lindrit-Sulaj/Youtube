@@ -38,7 +38,7 @@
 
 
   @include lg {
-    grid-template-columns: .16fr .84fr;
+    grid-template-columns: .06fr .94fr;
     grid-template-rows: 1fr;
     grid-template-areas: "sidebar content";
   }
@@ -46,7 +46,7 @@
   ;
 
   @include xl {
-    grid-template-columns: .12fr .88fr;
+    grid-template-columns: .04fr .96fr;
   }
 
   height: 100vh;

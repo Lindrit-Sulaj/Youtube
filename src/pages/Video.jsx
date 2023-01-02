@@ -1,46 +1,76 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { useGetVideoDetailsQuery, useGetVideoCommentsQuery, useGetSuggestedVideosQuery } from '../redux/services/youtubeApi';
+import { saveVideo, unsaveVideo } from '../redux/features/savesSlice';
 import { Loader, VideoCard } from '../components'
 
 const Video = () => {
-  const [descriptionOpened, setDescriptionOpened] = useState(false);
-  const [viewComments, setViewComments] = useState(true);
+  const dispatch = useDispatch();
   const { id } = useParams();
-  const formatter = Intl.NumberFormat('en', { notation: 'compact' });
-
   const videoDetails = useGetVideoDetailsQuery(id);
   const videoComments = useGetVideoCommentsQuery(id);
 
-  if (videoDetails.isLoading) return <div className='text-white'><Loader /></div>
+  const [descriptionOpened, setDescriptionOpened] = useState(false);
+  const [viewComments, setViewComments] = useState(false);
+  
+  const formatter = Intl.NumberFormat('en', { notation: 'compact' });
+  const saves = useSelector(state => state.saves);
 
+  const isVideoSaved = useMemo(() => {
+    let index = saves.findIndex(elem => elem.videoId == id);
+    
+    if (index > -1) {
+      return true;
+    }
+
+    return false;
+  }, [saves])
+
+  const handleSaveVideo = () => {
+    const result = videoDetails.data;
+
+    const video = {
+      thumbnail: result?.items[0]?.snippet?.thumbnails?.high?.url,
+      channelTitle: result?.items[0]?.snippet?.channelTitle,
+      title: result?.items[0]?.snippet?.title,
+      channelId: result?.items[0]?.snippet?.channelId,
+      videoId: result?.items[0]?.id
+    }
+
+    if (!isVideoSaved) {
+      dispatch(saveVideo(video));
+    } else if (isVideoSaved) {
+      dispatch(unsaveVideo(id));
+    }
+  };
+
+  if (videoDetails.isLoading) return <div className='text-white'><Loader /></div>
 
   return (
     <section className="video px-4 overflow-hidden">
       {!videoDetails.isLoading && !videoDetails.error && (
         <>
           <div className="text-white overflow-y-auto px-2 md:px-4">
-          <iframe className='aspect-video w-full rounded-xl'
+            <iframe className='aspect-video w-full rounded-xl cursor-pointer'
               src={`https://www.youtube-nocookie.com/embed/${id}`}>
             </iframe>
             <div className="text-white flex items-center justify-between  my-6">
               <div>
-                <Link to={`/channel/${videoDetails?.data?.items[0].snippet.channelId}`} className="text-neutral-500">{videoDetails?.data?.items[0]?.snippet.channelTitle}</Link>
-                <h1 className='text-xl font-secondary mt-1'>{videoDetails.data?.items[0].snippet.title}</h1>
+                <Link to={`/channel/${videoDetails?.data?.items[0]?.snippet?.channelId}`} className="text-neutral-500">{videoDetails?.data?.items[0]?.snippet.channelTitle}</Link>
+                <h1 className='text-xl font-secondary mt-1'>{videoDetails.data?.items[0]?.snippet.title}</h1>
                 <p className='flex gap-1 text-neutral-300 mt-2'>
-                  <span>{formatter.format(videoDetails?.data.items[0].statistics.viewCount)}</span>
+                  <span>{formatter.format(videoDetails?.data.items[0]?.statistics.viewCount)}</span>
                   <span>views</span>
                 </p>
               </div>
               <div className='flex gap-4'>
-                <button className="transition-all w-10 h-10 bg-neutral-700 flex items-center justify-center rounded-full hover:bg-neutral-800">
-                  <span className="material-symbols-outlined">bookmark</span>
+                <button className="transition-all w-10 h-10 bg-neutral-700 flex items-center justify-center rounded-full hover:bg-neutral-800" onClick={handleSaveVideo}>
+                  <i className={`fa-${(isVideoSaved) ? 'solid' : 'regular'} fa-bookmark`}></i>
                 </button>
                 <button className="transition-all w-10 h-10 bg-neutral-700 flex items-center justify-center rounded-full hover:bg-neutral-800">
-                  <span className="material-symbols-outlined">
-                    update
-                  </span>
+                  <i className="fa-solid fa-arrow-rotate-right"></i>
                 </button>
               </div>
             </div>
@@ -63,7 +93,7 @@ const Video = () => {
 
                   {(videoDetails.data.items[0].snippet.hasOwnProperty('tags')) && (
                     <>
-                      <p>Tags</p>
+                      <p className='mt-6 mb-2'>Tags</p>
                       <ul className='ml-6 text-neutral-300'>
                         {videoDetails.data.items[0].snippet.tags.map((tag, index) => (
                           <li className='list-style list-disc underline underline-offset-2' key={index}>
@@ -84,10 +114,10 @@ const Video = () => {
               </div>
               {(!videoComments.isLoading && !videoComments.error && !videoComments.data.hasOwnProperty('snippet')) && (
                 <div className={`${viewComments ? 'block' : 'hidden'}`}>
-                  {videoComments.data.items.map(comment => (
+                  {videoComments.data?.items?.map(comment => (
                     <Comment
                       key={comment.id}
-                      channelId={comment.snippet.topLevelComment.snippet.authorChannelId.value}
+                      channelId={comment.snippet.topLevelComment.snippet.authorChannelId?.value}
                       profileImage={comment.snippet.topLevelComment.snippet.authorProfileImageUrl}
                       text={comment.snippet.topLevelComment.snippet.textDisplay}
                       likes={comment.snippet.topLevelComment.snippet.likeCount}
@@ -100,7 +130,7 @@ const Video = () => {
               )}
             </div>
           </div>
-          <div className='overflow-auto'>
+          <div className='overflow-y-auto overflow-x-hidden'>
             <RelatedVideos id={id} />
           </div>
         </>
@@ -118,15 +148,15 @@ const RelatedVideos = (id) => {
 
   return (
     <div className="w-full flex flex-col md:flex-row flex-wrap gap-y-8 lg:flex-col">
-      {data.items.map(video => (
+      {data?.items?.map(video => (
         <div className='w-full md:w-1/3 md:px-2 lg:w-full lg:px-0' key={video.id.videoId}>
-          <Link to={video.id.videoId}>
+          <Link to={`../../video/${video.id.videoId}`} relative="path">
             <img className='w-full  object-cover aspect-video rounded-lg' src={video.snippet.thumbnails.high.url} alt={video.snippet.title} />
-            </Link>
-          <Link className="text-white block font-medium mt-4 mb-2" to={video.id.videoId}>
+          </Link>
+          <Link to={`/video/${video.id.videoId}`} relative='path' className="text-white block font-medium mt-4 mb-2">
             {video.snippet.title}
-            </Link>
-          <Link className='text-neutral-400 font-secondary' to={video.snippet.channelId}>
+          </Link>
+          <Link className='text-neutral-400 font-secondary' to={`../../channel/${video.snippet.channelId}`} relative="path">
             {video.snippet.channelTitle}
           </Link>
           <p className='text-neutral-500 mt-1'>{video.snippet.publishTime.slice(0, 10)}</p>

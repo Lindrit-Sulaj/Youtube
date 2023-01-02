@@ -12,7 +12,7 @@ const Discover = () => {
 
   return (
     <div className='text-white'>
-      <div className='suggestions flex gap-3 px-4 mt-2 overflow-auto'>
+      <div className='suggestions flex gap-3 px-4 mt-4 overflow-auto'>
         {
           Object.entries(suggestedVideos).map((suggestion, id) => (
             <Suggestion
@@ -26,7 +26,7 @@ const Discover = () => {
         }
       </div>
 
-      {(!isLoading && !error) ? (<div className='videos-normal flex flex-wrap'>
+      {(!isLoading && !error) ? (<div className='videos-normal flex flex-wrap my-6'>
         {data?.items.map((video, index) => (
           <VideoCard
             key={index}

@@ -8,8 +8,6 @@ const SearchResults = () => {
   const { id } = useParams();
   const { data, isLoading, error } = useGetSearchResultsQuery(id);
 
-  if (!isLoading) { console.log(data) }
-
   return (
     <div className='text-white'>
       {isLoading && <Loader />}
