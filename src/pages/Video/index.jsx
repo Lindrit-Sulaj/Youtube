@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { useGetVideoDetailsQuery, useGetVideoCommentsQuery, useGetSuggestedVideosQuery } from '../../redux/services/youtubeApi';
+import { useGetVideoDetailsQuery } from '../../redux/services/youtubeApi';
 import { saveVideo, unsaveVideo } from '../../redux/features/savesSlice';
 import { Loader, VideoCard } from '../../components';
 import Comments from './Comments';
@@ -12,10 +12,8 @@ const Video = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const videoDetails = useGetVideoDetailsQuery(id);
-  
 
   const [descriptionOpened, setDescriptionOpened] = useState(false);
-  const [viewComments, setViewComments] = useState(false);
   
   const formatter = Intl.NumberFormat('en', { notation: 'compact' });
   const saves = useSelector(state => state.saves);
@@ -28,7 +26,7 @@ const Video = () => {
     }
 
     return false;
-  }, [saves])
+  }, [saves, id])
 
   const handleSaveVideo = () => {
     const result = videoDetails.data;
