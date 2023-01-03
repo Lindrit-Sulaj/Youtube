@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { useGetVideoDetailsQuery } from '../../redux/services/youtubeApi';
 import { saveVideo, unsaveVideo } from '../../redux/features/savesSlice';
+import { addVideo } from '../../redux/features/historySlice';
 import { Loader, VideoCard } from '../../components';
 import Comments from './Comments';
 import RelatedVideos from './RelatedVideos';
@@ -12,9 +13,7 @@ const Video = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const videoDetails = useGetVideoDetailsQuery(id);
-
   const [descriptionOpened, setDescriptionOpened] = useState(false);
-  
   const formatter = Intl.NumberFormat('en', { notation: 'compact' });
   const saves = useSelector(state => state.saves);
 
@@ -26,7 +25,23 @@ const Video = () => {
     }
 
     return false;
-  }, [saves, id])
+  }, [saves, id]);
+
+  useEffect(() => {
+    if (videoDetails.isLoading && videoDetails.status !== 'fulfilled') return;
+    
+    const result = videoDetails.data;
+    
+    const video = {
+      thumbnail: result?.items[0]?.snippet?.thumbnails?.high?.url,
+      channelTitle: result?.items[0]?.snippet?.channelTitle,
+      title: result?.items[0]?.snippet?.title,
+      channelId: result?.items[0]?.snippet?.channelId,
+      videoId: result?.items[0]?.id
+    };
+
+    dispatch(addVideo(video));
+  }, [videoDetails, id])
 
   const handleSaveVideo = () => {
     const result = videoDetails.data;

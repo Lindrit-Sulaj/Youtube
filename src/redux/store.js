@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import feedReducer from './features/feedSlice';
 import savesReducer from './features/savesSlice';
 import subsReducer from './features/subsSlice';
+import historyReducer from './features/historySlice';
 import { youtubeApi } from "./services/youtubeApi";
 
 export const store = configureStore({
@@ -10,6 +11,7 @@ export const store = configureStore({
     feed: feedReducer,
     saves: savesReducer,
     subs: subsReducer,
+    history: historyReducer,
     [youtubeApi.reducerPath]: youtubeApi.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(youtubeApi.middleware)
