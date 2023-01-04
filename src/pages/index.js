@@ -4,6 +4,7 @@ import Channel from "./Channel";
 import Video from "./Video/";
 import Saves from "./Feed/Saves";
 import History from "./Feed/History";
+import Subscriptions from "./Feed/Subscriptions";
 
 export {
   Discover,
@@ -11,5 +12,6 @@ export {
   Channel,
   Video,
   Saves,
-  History
+  History,
+  Subscriptions
 }

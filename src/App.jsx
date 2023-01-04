@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 
 import { Sidebar, Navbar } from './components';
-import { SearchResults, Discover, Channel, Video, Saves, History } from './pages'
+import { SearchResults, Discover, Channel, Video, Saves, History, Subscriptions } from './pages'
 
 function App() {
   const state = useSelector(state => state);
@@ -22,6 +22,7 @@ function App() {
           <Route exact path='/video/:id' element={<Video />}></Route>
           <Route exact path='/feed/saved-videos' element={<Saves />}></Route>
           <Route exact path='/feed/history' element={<History />}></Route>
+          <Route exact path="/feed/subscriptions" element={<Subscriptions />}></Route>
         </Routes>
       </div>
     </div>

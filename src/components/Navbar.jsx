@@ -30,7 +30,7 @@ const Navbar = () => {
           </button>
 
           {menuOpened && (
-            <div className='absolute top-[60px] right-0 w-60  slide-in-top py-3 bg-neutral-850 rounded-lg'>
+            <div className='absolute top-[60px] right-0 w-40  slide-in-top py-3 bg-neutral-850 rounded-lg'>
               <div className='flex justify-between items-center pb-2 border-solid border-b-[1px] mb-4 px-3 border-b-neutral-800'>
                 <div className='text-sky-100 font-medium'>
                   <p>Youtube</p>
@@ -39,18 +39,20 @@ const Navbar = () => {
                   <i className="fa-solid fa-xmark"></i>
                 </button>
               </div>
-              <MenuItem
-                icon="fa-solid fa-bookmark"
-                title="Saved videos"
-                link="/feed/saved-videos" />
-              <MenuItem
-                icon="fa-solid fa-address-book"
-                title="History"
-                link="/feed/history" />
-              <MenuItem
-                icon="fa-solid fa-clapperboard"
-                title="Subscriptions"
-                link="/feed/subscriptions" />
+              <div className='flex justify-center'>
+                <MenuItem
+                  icon="fa-solid fa-bookmark"
+                  title="Saved videos"
+                  link="/feed/saved-videos" />
+                <MenuItem
+                  icon="fa-solid fa-address-book"
+                  title="History"
+                  link="/feed/history" />
+                <MenuItem
+                  icon="fa-solid fa-clapperboard"
+                  title="Subscriptions"
+                  link="/feed/subscriptions" />
+              </div>
             </div>
           )}
         </div>
