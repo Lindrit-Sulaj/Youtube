@@ -7,7 +7,7 @@ const VideoCard = (
   return (
     <>
       {type === 'normal' ? (
-        <div className='w-[100%] mx-auto py-4 md:p-4 md:w-1/3 md:mx-0 lg:w-1/4 xl:w-1/5'>
+        <div className='w-[100%] mx-auto text-white py-4 md:p-4 md:w-1/3 md:mx-0 lg:w-1/4 xl:w-1/5'>
           <img src={thumbnail} alt={title} className="w-full aspect-video object-cover md:h-auto md:rounded-xl md:border-solid md:border-[2px] md:border-neutral-850" />
           <Link to={`/video/${videoId}`}>
             <h2 className='text-[17px] mt-6 mb-1 mx-2 md:mx-0 font-medium'>{title}</h2>

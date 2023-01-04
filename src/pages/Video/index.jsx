@@ -64,10 +64,10 @@ const Video = () => {
   if (videoDetails.isLoading) return <div className='text-white'><Loader /></div>
 
   return (
-    <section className="video px-4 overflow-hidden">
+    <section className="video px-2 pl-3 md:px-4 overflow-hidden">
       {!videoDetails.isLoading && !videoDetails.error && (
         <>
-          <div className="text-white overflow-y-auto px-2 md:px-4">
+          <div className="text-white overflow-y-auto px-0 md:px-4">
             <iframe className='aspect-video w-full rounded-xl cursor-pointer'
               src={`https://www.youtube-nocookie.com/embed/${id}`}>
             </iframe>
@@ -83,9 +83,6 @@ const Video = () => {
               <div className='flex gap-4'>
                 <button className="transition-all w-10 h-10 bg-neutral-700 flex items-center justify-center rounded-full hover:bg-neutral-800" onClick={handleSaveVideo}>
                   <i className={`fa-${(isVideoSaved) ? 'solid' : 'regular'} fa-bookmark`}></i>
-                </button>
-                <button className="transition-all w-10 h-10 bg-neutral-700 flex items-center justify-center rounded-full hover:bg-neutral-800">
-                  <i className="fa-solid fa-arrow-rotate-right"></i>
                 </button>
               </div>
             </div>

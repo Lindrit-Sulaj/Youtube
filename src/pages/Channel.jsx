@@ -66,7 +66,7 @@ const Channel = () => {
             </div>
             <button
               onClick={handleSubscribe}
-              className={`transition-all ml-auto px-4 py-[6px] rounded-md ${!isSubscribed ? 'bg-neutral-600 hover:bg-neutral-700' : 'bg-blue-600 hover:bg-blue-700'}`}>
+              className={`transition-all ml-auto px-6 py-[8px] rounded-full ${!isSubscribed ? 'bg-neutral-600 hover:bg-neutral-700' : 'bg-blue-600 hover:bg-blue-700'}`}>
               {isSubscribed ? 'Subscribed' : 'Subscribe '}
             </button>
           </div>

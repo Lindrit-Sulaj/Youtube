@@ -2,10 +2,12 @@ import Discover from "./Discover";
 import SearchResults from "./SearchResults";
 import Channel from "./Channel";
 import Video from "./Video/";
+import Saves from "./Feed/Saves";
 
 export {
   Discover,
   SearchResults,
   Channel,
-  Video
+  Video,
+  Saves
 }
