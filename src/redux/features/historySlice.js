@@ -14,13 +14,14 @@ export const historySlice = createSlice({
       return newState;
     },
     removeVideo: (state, { payload }) => {
-      let newState = state.filter(elem => elem.videoId === payload);
+      let newState = state.filter(elem => elem.videoId !== payload);
       localStorage.setItem('historySlice', JSON.stringify(newState));
       return newState;
     },
     clearHistory: (state) => {
-      state = [];
-      localStorage.setItem('historySlice', JSON.stringify(state))
+      let newState = [];
+      localStorage.setItem('historySlice', JSON.stringify(newState));
+      return newState;
     }
   }
 });
