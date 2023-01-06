@@ -6,6 +6,12 @@
   padding: 0;
 }
 
+@mixin dark {
+  @media (prefers-color-scheme: light) {
+    @content;
+  }
+}
+
 @mixin sm {
   @media (min-width: 768px) {
     @content;
@@ -77,17 +83,29 @@
 /* Track */
 ::-webkit-scrollbar-track {
   background: #101010;
+
+  @include dark {
+    background: white;
+  }
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: rgb(44, 45, 48);
+
+  @include dark {
+    background: lightgray;
+  }
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+
+  @include dark {
+    background: gray;
+  }
 }
 
 .suggestions::-webkit-scrollbar {
