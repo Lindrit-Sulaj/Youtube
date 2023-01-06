@@ -15,13 +15,13 @@ const RelatedVideos = (id) => {
           <Link to={`../../video/${video.id.videoId}`} relative="path">
             <img className='w-full  object-cover aspect-video rounded-lg' src={video.snippet.thumbnails.high.url} alt={video.snippet.title} />
           </Link>
-          <Link to={`/video/${video.id.videoId}`} relative='path' className="text-white block font-medium mt-4 mb-2">
+          <Link to={`/video/${video.id.videoId}`} relative='path' className="text-neutral-700 dark:text-white block font-medium mt-4 mb-2">
             {video.snippet.title}
           </Link>
-          <Link className='text-neutral-400 font-secondary' to={`../../channel/${video.snippet.channelId}`} relative="path">
+          <Link className='text-neutral-500 dark:text-neutral-400 font-secondary' to={`../../channel/${video.snippet.channelId}`} relative="path">
             {video.snippet.channelTitle}
           </Link>
-          <p className='text-neutral-500 mt-1'>{video.snippet.publishTime.slice(0, 10)}</p>
+          <p className='text-neutral-400 dark:text-neutral-500 mt-1'>{video.snippet.publishTime.slice(0, 10)}</p>
         </div>
       ))}
     </div>

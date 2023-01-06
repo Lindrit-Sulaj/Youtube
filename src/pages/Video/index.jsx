@@ -19,7 +19,7 @@ const Video = () => {
 
   const isVideoSaved = useMemo(() => {
     let index = saves.findIndex(elem => elem.videoId == id);
-    
+
     if (index > -1) {
       return true;
     }
@@ -29,9 +29,9 @@ const Video = () => {
 
   useEffect(() => {
     if (videoDetails.isLoading && videoDetails.status !== 'fulfilled') return;
-    
+
     const result = videoDetails.data;
-    
+
     const video = {
       thumbnail: result?.items[0]?.snippet?.thumbnails?.high?.url,
       channelTitle: result?.items[0]?.snippet?.channelTitle,
@@ -71,29 +71,29 @@ const Video = () => {
             <iframe className='aspect-video w-full rounded-xl cursor-pointer'
               src={`https://www.youtube-nocookie.com/embed/${id}`}>
             </iframe>
-            <div className="text-white flex items-center justify-between  my-6">
+            <div className="text-black dark:text-white flex items-center justify-between  my-6">
               <div>
                 <Link to={`/channel/${videoDetails?.data?.items[0]?.snippet?.channelId}`} className="text-neutral-500">{videoDetails?.data?.items[0]?.snippet.channelTitle}</Link>
-                <h1 className='text-xl font-secondary mt-1'>{videoDetails.data?.items[0]?.snippet.title}</h1>
-                <p className='flex gap-1 text-neutral-300 mt-2'>
+                <h1 className='text-xl text-neutral-800 dark:text-white font-secondary mt-1'>{videoDetails.data?.items[0]?.snippet.title}</h1>
+                <p className='flex gap-1 text-neutral-400 dark:text-neutral-300 mt-2'>
                   <span>{formatter.format(videoDetails?.data.items[0]?.statistics.viewCount)}</span>
                   <span>views</span>
                 </p>
               </div>
               <div className='flex gap-4'>
-                <button className="transition-all w-10 h-10 bg-neutral-700 flex items-center justify-center rounded-full hover:bg-neutral-800" onClick={handleSaveVideo}>
+                <button className="transition-all w-10 h-10 dark:text-white dark:bg-neutral-700 flex items-center justify-center rounded-full dark:hover:bg-neutral-800" onClick={handleSaveVideo}>
                   <i className={`fa-${(isVideoSaved) ? 'solid' : 'regular'} fa-bookmark`}></i>
                 </button>
               </div>
             </div>
-            <div className='bg-neutral-800 rounded-lg p-4 border-solid border-[1px] border-neutral-800' onClick={() => {
+            <div className='bg-neutral-150 dark:bg-neutral-800 rounded-lg p-4 border-solid border-[1px] border-neutral-300 dark:border-neutral-800' onClick={() => {
               if (!descriptionOpened) {
                 setDescriptionOpened(true);
               }
             }}>
               <div className='flex justify-between'>
-                <button className='uppercase font-medium' onClick={() => setDescriptionOpened(true)}>Description</button>
-                <button onClick={() => setDescriptionOpened(false)} className={`${(!descriptionOpened) ? 'hidden' : 'flex justify-center items-center'} w-8 h-8 bg-neutral-700 rounded-full`}>
+                <button className='uppercase text-black font-medium dark:text-white' onClick={() => setDescriptionOpened(true)}>Description</button>
+                <button onClick={() => setDescriptionOpened(false)} className={`${(!descriptionOpened) ? 'hidden' : 'flex justify-center items-center'} w-8 h-8 bg-neutral-500 dark:bg-neutral-700 rounded-full`}>
                   <span className="material-symbols-outlined">
                     close
                   </span>
@@ -105,8 +105,8 @@ const Video = () => {
 
                   {(videoDetails.data.items[0].snippet.hasOwnProperty('tags')) && (
                     <>
-                      <p className='mt-6 mb-2'>Tags</p>
-                      <ul className='ml-6 text-neutral-300'>
+                      <p className='mt-6 mb-2 text-black dark:text-white'>Tags</p>
+                      <ul className='ml-6 text-neutral-700 dark:text-neutral-300'>
                         {videoDetails.data.items[0].snippet.tags.map((tag, index) => (
                           <li className='list-style list-disc underline underline-offset-2' key={index}>
                             <Link to={`/search/${tag}`}>{tag}</Link>

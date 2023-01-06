@@ -50,7 +50,7 @@ const Discover = () => {
 
 const Suggestion = ({ title, videoId, selectedSuggestion, setSelectedSuggestion }) => {
   return (
-    <button className={`${selectedSuggestion === videoId ? 'bg-neutral-300 text-black hover:bg-neutral-400' : ''} transition-all whitespace-nowrap rounded-md bg-neutral-800 px-2 py-1 font-secondary capitalize hover:bg-neutral-700`} onClick={() => setSelectedSuggestion(videoId)}>
+    <button className={`${selectedSuggestion === videoId ? 'text-white bg-neutral-700 hover:bg-neutral-800  dark:bg-neutral-300 dark:text-black dark:hover:bg-neutral-400' : 'bg-neutral-100 hover:bg-neutral-150 text-neutral-700 dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700'} transition-all whitespace-nowrap  rounded-md px-2 py-1 font-secondary capitalize`} onClick={() => setSelectedSuggestion(videoId)}>
       {title}
     </button>
   )

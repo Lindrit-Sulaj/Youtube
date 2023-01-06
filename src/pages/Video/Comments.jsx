@@ -9,11 +9,15 @@ const Comments = () => {
   const videoComments = useGetVideoCommentsQuery(id);
   const formatter = Intl.NumberFormat('en', { notation: 'compact' });
 
+  if (videoComments?.data?.items < 1  || videoComments?.data?.error?.errors[0].reason == "commentsDisabled") {
+    return;
+  }
+
   return (
     <div className='mt-8 pb-4'>
       <div className='flex justify-between mb-2'>
-        <p className='font-secondary'>Comments</p>
-        <button onClick={() => setViewComments(!viewComments)} className='text-blue-300'>{viewComments ? 'Hide' : 'Show'}</button>
+        <p className='font-secondary text-black dark:text-white'>Comments</p>
+        <button onClick={() => setViewComments(!viewComments)} className='text-blue-600 dark:text-blue-300'>{viewComments ? 'Hide' : 'Show'}</button>
       </div>
       {(!videoComments.isLoading && !videoComments.error && !videoComments.data.hasOwnProperty('snippet')) && (
         <div className={`${viewComments ? 'block' : 'hidden'}`}>
@@ -42,20 +46,20 @@ const Comment = (
   const goToProfile = () => navigate(`/channel/${channelId}`)
 
   return (
-    <div className='my-2 px-3 py-3 bg-neutral-900 rounded-lg overflow-x-auto'>
+    <div className='my-2 px-3 py-3 bg-neutral-150 dark:bg-neutral-900 rounded-lg overflow-x-auto'>
       <div className='flex gap-2 items-center' onClick={goToProfile}>
         <img className='rounded-full w-10 h-10' src={profileImage} alt={displayName} />
-        <h2 className='text-neutral-400 font-medium'>{displayName}</h2>
+        <h2 className='text-neutral-700 dark:text-neutral-400 font-medium'>{displayName}</h2>
       </div>
-      <p className='mt-3 font-secondary'>{text}</p>
+      <p className='mt-3 font-secondary text-neutral-800 dark:text-white'>{text}</p>
       <div className='flex gap-4 mt-2'>
         <div className='flex items-center gap-1'>
-          <span className='material-symbols-outlined text-red-400 text-xl'>favorite</span>
-          <span className='text-sm'>{formatter.format(likes)}</span>
+          <span className='material-symbols-outlined text-red-700 dark:text-red-400 text-xl'>favorite</span>
+          <span className='text-sm text-neutral-800 dark:text-white'>{formatter.format(likes)}</span>
         </div>
         <div className='flex items-center gap-1'>
-          <span className="material-symbols-outlined text-neutral-400 text-xl">forum</span>
-          <span className='text-sm'>{formatter.format(replies)}</span>
+          <span className="material-symbols-outlined text-neutral-600 dark:text-neutral-400 text-xl">forum</span>
+          <span className='text-sm text-neutral-800 dark:text-white'>{formatter.format(replies)}</span>
         </div>
       </div>
     </div>

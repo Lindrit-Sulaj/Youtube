@@ -11,7 +11,7 @@ function App() {
 
 
   return (
-    <div className="App font-default bg-neutral-100 dark:bg-neutral-1000">
+    <div className="App font-default bg-white dark:bg-neutral-1000">
       <Navbar />
       <Sidebar />
       <div className="content pt-[75px]">

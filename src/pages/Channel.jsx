@@ -51,7 +51,7 @@ const Channel = () => {
   }
 
   return (
-    <div className="text-white my-3">
+    <div className="text-black dark:text-white my-3">
       {(!isLoading && !error) && (
         <div>
           <div>
@@ -61,28 +61,28 @@ const Channel = () => {
             <img className="w-12 h-12 md:w-24 md:h-24 object-cover rounded-full" src={data.items[0].snippet.thumbnails.high.url} alt={`${data.items[0].brandingSettings.channel.title} profile picture`} />
             <div>
               <h1 className="text-[17px] md:text-lg font-medium font-secondary">{data?.items[0].brandingSettings.channel.title}</h1>
-              <h2 className='text-neutral-400 text-[15px] mb-1 md:mb-2 md:text-base'>{data?.items[0].snippet.customUrl}</h2>
-              <p className='text-neutral-400 text-sm font-medium md:text-base'>{formatter.format(data?.items[0].statistics.subscriberCount)} Subscribers</p>
+              <h2 className='text-neutral-600 dark:text-neutral-400 text-[15px] mb-1 md:mb-2 md:text-base'>{data?.items[0].snippet.customUrl}</h2>
+              <p className='text-neutral-600 dark:text-neutral-400 text-sm font-medium md:text-base'>{formatter.format(data?.items[0].statistics.subscriberCount)} Subscribers</p>
             </div>
             <button
               onClick={handleSubscribe}
-              className={`transition-all ml-auto px-6 py-[8px] rounded-full ${!isSubscribed ? 'bg-neutral-600 hover:bg-neutral-700' : 'bg-blue-600 hover:bg-blue-700'}`}>
+              className={`transition-all ml-auto px-6 text-white py-[8px] rounded-full ${!isSubscribed ? 'bg-neutral-600 hover:bg-neutral-700' : 'bg-blue-600 hover:bg-blue-700'}`}>
               {isSubscribed ? 'Subscribed' : 'Subscribe '}
             </button>
           </div>
           <div className='w-full md:w-5/6 px-4 md:px-0 mx-auto mt-16'>
-            <p className='font-secondary font-medium uppercase text-sky-400'>About</p>
-            <p className='mt-3 text-neutral-300'>{data.items[0].snippet.description}</p>
+            <p className='font-secondary font-medium uppercase text-sky-600 dark:text-sky-400'>About</p>
+            <p className='mt-3 text-neutral-600 dark:text-neutral-300'>{data.items[0].snippet.description}</p>
           </div>
-          <hr className='md:w-5/6 mx-auto border-none h-1 my-8 bg-neutral-800' />
+          <hr className='md:w-5/6 mx-auto border-none h-1 my-8 bg-neutral-100 dark:bg-neutral-800' />
 
           {videosLoading && <p>Loading videos</p>}
           {videosError && <p>Couldn't load videos</p>}
           {(!videosLoading && !videosError) && (
             <div className='px-4 mx-auto mt-14'>
               <div className='flex gap-6 md:gap-8 px-4'>
-                <p className='text-neutral-300 font-medium font-secondary'>Videos: {formatter.format(data.items[0].statistics.videoCount)}</p>
-                <p className="text-neutral-300 font-medium font-secondary">Views: {formatter.format(data.items[0].statistics.viewCount)}</p>
+                <p className='text-neutral-700 dark:text-neutral-300 font-medium font-secondary'>Videos: {formatter.format(data.items[0].statistics.videoCount)}</p>
+                <p className="text-neutral-700 dark:text-neutral-300 font-medium font-secondary">Views: {formatter.format(data.items[0].statistics.viewCount)}</p>
               </div>
               <div className='flex flex-wrap'>
                 {videosData.items.map((video, id) => {

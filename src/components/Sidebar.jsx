@@ -10,9 +10,9 @@ const Sidebar = () => {
         <MenuItem title="Subscriptions" link="/feed/subscriptions" icon="fa-solid fa-clapperboard" />
         <MenuItem title="Saved videos" link="/feed/saved-videos" icon="fa-solid fa-bookmark" />
         <MenuItem title="History" link="/feed/history" icon="fa-solid fa-address-book" />
-        <a href="https://github.com/Lindrit-Sulaj" className="bg-neutral-800 h-14 w-14 flex items-center justify-center rounded-lg">
+        <a href="https://github.com/Lindrit-Sulaj" className="bg-neutral-200 dark:bg-neutral-800 h-14 w-14 flex items-center justify-center rounded-lg">
           <div className='flex justify-center items-center'>
-            <i className={`fa-brands fa-github text-neutral-200`}></i>
+            <i className={`fa-brands fa-github text-neutral-600 dark:text-neutral-200`}></i>
           </div>
         </a>
       </div>
