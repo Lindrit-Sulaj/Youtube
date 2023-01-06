@@ -20,9 +20,9 @@ function App() {
           <Route path='/search/:id' element={<SearchResults />}></Route>
           <Route path='/channel/:id' element={<Channel />}></Route>
           <Route exact path='/video/:id' element={<Video />}></Route>
-          <Route exact path='/saved-videos' element={<Saves />}></Route>
-          <Route exact path='/history' element={<History />}></Route>
-          <Route exact path="/subscriptions" element={<Subscriptions />}></Route>
+          <Route path='/saved-videos' element={<Saves />}></Route>
+          <Route path='/history' element={<History />}></Route>
+          <Route path="/subscriptions" element={<Subscriptions />}></Route>
         </Routes>
       </div>
     </div>
