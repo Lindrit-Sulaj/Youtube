@@ -7,7 +7,7 @@
 }
 
 @mixin dark {
-  @media (prefers-color-scheme: light) {
+  @media (prefers-color-scheme: dark) {
     @content;
   }
 }
@@ -82,29 +82,30 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #101010;
+  background: white;
 
   @include dark {
-    background: white;
+    background: #101010;
   }
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(44, 45, 48);
+  background: lightgray;
 
   @include dark {
-    background: lightgray;
+    background: rgb(44, 45, 48);
   }
+
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: gray;
 
   @include dark {
-    background: gray;
+    background: #555;
   }
 }
 
