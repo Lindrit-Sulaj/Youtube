@@ -16,10 +16,10 @@ function App() {
       <Sidebar />
       <div className="content pt-[75px]">
         <Routes>
-          <Route exact path='/' element={<Discover />}></Route>
+          <Route path='/' element={<Discover />}></Route>
           <Route path='/search/:id' element={<SearchResults />}></Route>
           <Route path='/channel/:id' element={<Channel />}></Route>
-          <Route exact path='/video/:id' element={<Video />}></Route>
+          <Route path='/video/:id' element={<Video />}></Route>
           <Route path='/saved-videos' element={<p>Saves</p>}></Route>
           <Route path='/history' element={<p>History</p>}></Route>
           <Route path="/subscriptions" element={<p>Subscriptions</p>}></Route>
